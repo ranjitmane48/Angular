@@ -13,28 +13,18 @@ export class AppComponent {
   newServerName = "Sample Server Name";
   newServerContent = "Sample Server Content";
 
-
-  onAddServer() : any {
-    console.log("onAddServer method is called");
-  }
-
-  onAddBluePrint() : any {
-    console.log("onAddBluePrint method is called");
-  }
-
   onServerAdded(serverData : any) {
     this.serverElements.push({
       type: 'server',
-      name: serverData.name,
+      name: serverData.serverName,
       content: serverData.serverContent
     });
-    console.log("app.component.ts -> onServerAdded method is called");
   }
 
   onBluePrintAdded(bluePrintData: any) {
     this.serverElements.push({
       type: 'server',
-      name: bluePrintData.name,
+      name: bluePrintData.serverName,
       content: bluePrintData.serverContent
     });
     console.log("app.component.ts -> onBluePrintAdded method is called");

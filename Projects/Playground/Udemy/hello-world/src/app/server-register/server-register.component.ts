@@ -1,27 +1,34 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'app-server-register',
   templateUrl: './server-register.component.html',
-  styleUrls: ['./server-register.component.css']
+  styleUrls: ['./server-register.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class ServerRegisterComponent {
   title = 'app-hello-world'; 
-  newServerName = '';
   newServerContent = '';
 
   @Output()
-  serverCreated = new EventEmitter<{type: string, name: string, serverContent: string}>();
+  serverCreated = new EventEmitter<{type: string, serverName: string, serverContent: string}>();
   @Output()
-  bluePrintCreated = new EventEmitter<{type: string, name: string, serverContent: string}>();
+  bluePrintCreated = new EventEmitter<{type: string, serverName: string, serverContent: string}>();
 
-  onAddServer() : any {
-    this.serverCreated.emit({type: 'server', name: this.newServerName, serverContent: this.newServerContent});
-    console.log("onAddServer method is called");
+  onAddServer(nameInput: HTMLInputElement) : any {
+    console.log(nameInput.value);
+    this.serverCreated.emit({
+      type: 'server', 
+      serverName: nameInput.value, 
+      serverContent: this.newServerContent
+    });  
   }
 
-  onAddBluePrint() : any {
-    this.bluePrintCreated.emit({type: 'server', name: this.newServerName, serverContent: this.newServerContent});
-    console.log("onAddBluePrint method is called");
+  onAddBluePrint(nameInput: HTMLInputElement) : any {
+    this.bluePrintCreated.emit({
+      type: 'server', 
+      serverName: nameInput.value, 
+      serverContent: this.newServerContent
+    });
   }
 }
