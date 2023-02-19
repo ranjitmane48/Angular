@@ -1,4 +1,11 @@
-import { Component, ElementRef, EventEmitter, Output, ViewChild, ViewEncapsulation } from '@angular/core';
+import { 
+  Component, 
+  ElementRef, 
+  EventEmitter, 
+  Output, 
+  ViewChild, 
+  ViewEncapsulation 
+} from '@angular/core';
 
 @Component({
   selector: 'app-server-register',
@@ -14,13 +21,14 @@ export class ServerRegisterComponent {
   serverContentInput : ElementRef | undefined;
 
   @Output()
-  serverCreated = new EventEmitter<{type: string, serverName: string, serverContent: string}>();
+  serverCreated = 
+  new EventEmitter<{type: string, serverName: string, serverContent: string}>();
   
   @Output()
-  bluePrintCreated = new EventEmitter<{type: string, serverName: string, serverContent: string}>();
+  bluePrintCreated = 
+  new EventEmitter<{type: string, serverName: string, serverContent: string}>();
 
   onAddServer(nameInput: HTMLInputElement) : any {
-    console.log(this.serverContentInput);
     this.serverCreated.emit({
       type: 'server', 
       serverName: nameInput.value, 
