@@ -1,0 +1,20 @@
+.frame {
+    height: 250px;
+    background: transparent no-repeat center;
+    background-size: cover;
+}
+
+.product-description {
+    height: 250px;
+}
+
+/* .product-header {
+    position: relative;
+    height: 250px;
+}
+
+.product-action-buttons {
+ position: absolute;
+ bottom: 0;
+ left: 0;
+} */

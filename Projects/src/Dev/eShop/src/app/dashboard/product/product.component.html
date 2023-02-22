@@ -1,0 +1,44 @@
+<div class="card mb-1 shadow-sm border border-1">
+    <div class="row g-0">
+        <div class="col-5">
+            <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div *ngFor="let image of this?.product?.images; let i = index" [ngClass]="{'carousel-item': true, 'active': i === 0}">
+                        <img [src]="image" class="d-block frame"  alt="...">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-7">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col">
+
+                        <div class="d-flex align-items-start flex-column" style="height: 250px;">
+                            <div>
+                                <h5 class="card-title">{{this.product?.title}}</h5>
+                                <p class="card-text">{{this.product?.description}}</p>
+                                <p class="card-text">{{this.product?.price | currency}}</p>
+                                <p class="card-text">{{this.product?.rating}}</p>
+                            </div>
+
+                            <div class="d-grid gap-2 d-md-block mt-auto">
+                                <a href="#"
+                                type="button"
+                                class="btn btn-sm me-2 border border-2 bg-info rounded-1">
+                                Add to cart
+                                </a>
+                                <a href="#"
+                                type="button"
+                                class="btn btn-sm me-2 border border-1 bg-light rounded-1">
+                                Buy Now
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
