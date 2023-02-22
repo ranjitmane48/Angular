@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col">
         <button class="btn btn-primary">Only show odd numbers</button>
- 
+
 
         <ul class="list-group my-2 ">
             <li class="list-group-item"
@@ -11,7 +11,7 @@
                 {{number}}
             </li>
         </ul>
-      
+
         <ul class="list-group my-2">
             <li class="list-group-item"
                 *ngFor="let evenNumber of evenNumbers"
@@ -20,7 +20,7 @@
                 {{evenNumber}}
             </li>
         </ul>
-   
+
         <ul class="list-group my-2 ">
             <li class="list-group-item"
                 *ngFor="let oddNumber of oddNumbers"
@@ -36,5 +36,5 @@
 
 <div class="container">
     <p appBasicHighlight>Test Basic Highlight</p>
-    <p appBetterHighlight>Test Better Highlight</p>
+    <p appBetterHighlight [defaultColor]="'magenta'" [highlightColor]="'red'">Test Better Highlight</p>
 </div>
