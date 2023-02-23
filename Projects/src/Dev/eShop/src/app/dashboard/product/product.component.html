@@ -1,10 +1,10 @@
-<div class="card mb-1 shadow-sm border border-1">
-    <div class="row g-0">
+<div class="card mb-1 shadow-sm border border-1 w-50 mx-auto">
+    <div class="row">
         <div class="col-5">
             <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
                     <div *ngFor="let image of this?.product?.images; let i = index" [ngClass]="{'carousel-item': true, 'active': i === 0}">
-                        <img [src]="image" class="d-block frame"  alt="...">
+                        <img [src]="image" class="d-block frame p-3"  alt="...">
                     </div>
                 </div>
             </div>
@@ -15,28 +15,56 @@
                     <div class="col">
 
                         <div class="d-flex align-items-start flex-column" style="height: 250px;">
-                            <div>
-                                <h5 class="card-title">{{this.product?.title}}</h5>
-                                <p class="card-text">{{this.product?.description}}</p>
-                                <p class="card-text">{{this.product?.price | currency}}</p>
-                                <p class="card-text">{{this.product?.rating}}</p>
+
+                            <div class="row">
+                                <div class="col">
+                                    <h5 class="card-title">{{this.product?.title}}</h5>
+                                </div>
                             </div>
 
-                            <div class="d-grid gap-2 d-md-block mt-auto">
-                                <a href="#"
-                                type="button"
-                                class="btn btn-sm me-2 border border-2 bg-info rounded-1">
-                                Add to cart
-                                </a>
-                                <a href="#"
-                                type="button"
-                                class="btn btn-sm me-2 border border-1 bg-light rounded-1">
-                                Buy Now
-                                </a>
+                            <div class="row">
+                                <div class="col-12">
+                                    <p class="card-text">
+                                        {{this.product?.description}}
+                                    </p>
+                                </div>
                             </div>
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <p class="card-text fw-bold">{{this.product?.price | currency}}</p>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-12">
+                                   <label class="fw-medium">Rating :</label>
+                                   <span class="card-text">
+                                        {{this.product?.rating}}
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="row mt-auto">
+                                <div class="col-12">
+                                    <div class="d-grid gap-2 d-md-block">
+                                        <a href="#"
+                                        type="button"
+                                        class="btn btn-sm me-2 border border-2 bg-info rounded-1">
+                                        Add to cart
+                                        </a>
+                                        <a href="#"
+                                        type="button"
+                                        class="btn btn-sm me-2 border border-1 bg-light rounded-1">
+                                        Buy Now
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
