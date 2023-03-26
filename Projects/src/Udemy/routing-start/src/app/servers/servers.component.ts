@@ -21,9 +21,7 @@ export class ServersComponent implements OnInit {
   }
 
   reload() {
-    console.log('start of reload');
     // Navigate method does not know which route you are currently on unlike routerLink
     //this.router.navigate(['servers'], { relativeTo: this.route });
-    console.log('end of reload');
   }
 }

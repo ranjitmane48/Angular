@@ -14,4 +14,11 @@ export class HomeComponent implements OnInit {
   onNavigateToUsersButtonClick() {
     this.router.navigate(['users']);
   }
+
+  loadServer(id: number) {
+    this.router.navigate(['/servers', id, 'edit'], {
+      queryParams: { allowEdit: '1' },
+      fragment: 'loading',
+    });
+  }
 }
