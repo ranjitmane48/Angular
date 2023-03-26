@@ -10,11 +10,7 @@ import { ServersService } from './servers.service';
 export class ServersComponent implements OnInit {
   public servers: { id: number; name: string; status: string }[] = [];
 
-  constructor(
-    private router: Router,
-    private route: ActivatedRoute,
-    private serversService: ServersService
-  ) {}
+  constructor(private serversService: ServersService) {}
 
   ngOnInit() {
     this.servers = this.serversService.getServers();

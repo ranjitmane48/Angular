@@ -3,8 +3,8 @@
     <div class="list-group">
       <!-- query params is bindable property of router link directive -->
       <a
-        [routerLink]="['/servers', 1, 'edit']"
-        [queryParams]="{ allowEdit: '1', isEdit: true }"
+        [routerLink]="['/servers', server.id]"
+        [queryParams]="{ allowEdit: server.id, isEdit: true }"
         fragment="loading"
         href="#"
         class="list-group-item"
@@ -20,6 +20,6 @@
     </button>
     <app-edit-server></app-edit-server>
     <hr />
-    <app-server></app-server>
+    <!-- <app-server></app-server> -->
   </div>
 </div>
