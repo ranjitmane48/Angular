@@ -1,1 +1,32 @@
-<label class="form-control">TEST</label>
+<div class="row">
+  <div class="col-sm-6 col-sm-offset-6 col-md-6 col-md-offset-6">
+    <div class="form-group m-5">
+      <label for="task-name">Task Name</label>
+      <input
+        type="text"
+        id="task-name"
+        class="form-control my-2"
+        [(ngModel)]="taskName"
+      />
+
+      <label for="priority">Priority</label>
+      <select id="priority" class="form-control my-2" [(ngModel)]="priority">
+        <option value="high">High</option>
+        <option value="medium">Medium</option>
+        <option value="low">Low</option>
+      </select>
+
+      <label for="dueDate">Due Date</label>
+      <input
+        id="dueDate"
+        class="form-control my-2"
+        type="date"
+        [(ngModel)]="dueDate"
+      />
+
+      <button class="btn btn-primary btn-save my-2" (click)="createTask()">
+        Add Task
+      </button>
+    </div>
+  </div>
+</div>
