@@ -12,6 +12,7 @@ import { CreateTaskListComponent } from './dashboard/tasks/create-task-list/crea
 import { RouterModule, Routes } from '@angular/router';
 import { PathNotFoundComponent } from './shared/path-not-found/path-not-found.component';
 import { FormsModule } from '@angular/forms';
+import { TasksService } from './shared/services/tasks.service';
 
 const Routes: Routes = [
   { path: '', component: TasksComponent },
@@ -34,7 +35,7 @@ const Routes: Routes = [
     PathNotFoundComponent,
   ],
   imports: [BrowserModule, FormsModule, RouterModule.forRoot(Routes)],
-  providers: [],
+  providers: [TasksService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

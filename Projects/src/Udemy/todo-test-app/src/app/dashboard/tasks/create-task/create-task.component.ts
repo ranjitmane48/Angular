@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { TasksService } from 'src/app/shared/services/tasks.service';
 
 @Component({
   selector: 'app-create-task',
@@ -8,11 +10,15 @@ import { Component } from '@angular/core';
 export class CreateTaskComponent {
   taskName: string = '';
   priority: string = '';
-  dueDate: Date | undefined;
+  dueDate: Date = new Date();
 
-  createTask(): void {
+  constructor(private tasksService: TasksService, private router: Router) {}
+
+  addTask(): void {
+    this.tasksService.addTask(this.taskName, this.priority, this.dueDate);
     console.log(
       `Task is created with task name : ${this.taskName} , priority : ${this.priority}, due date : ${this.dueDate}`
     );
+    this.router.navigate(['/']);
   }
 }

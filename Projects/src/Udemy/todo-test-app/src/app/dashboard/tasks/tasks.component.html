@@ -9,11 +9,21 @@
           <h4 class="fs-5 fw-bold my-4">My Tasks</h4>
           <ul class="list-group">
             <li class="list-group-item" *ngFor="let task of this.tasks">
-              {{ task }}
+              <span class="m-2">{{ task.taskName }}</span>
+              <span class="m-2">{{ task.priority }}</span>
+              <span class="m-2">{{ task.dueDate }}</span>
             </li>
           </ul>
         </div>
       </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="offset-1 col-11">
+      <button type="button" class="btn btn-primary my-2" (click)="addNewTask()">
+        Add new Task
+      </button>
     </div>
   </div>
 </div>
