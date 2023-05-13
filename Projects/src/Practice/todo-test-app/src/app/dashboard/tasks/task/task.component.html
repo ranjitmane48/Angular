@@ -1,0 +1,26 @@
+<div class="container-fluid">
+  <div class="row row-cols-2">
+    <div class="col-9">
+      <div class="row row-cols-3">
+        <div class="col-3">
+          <span class="m-1">{{ task.taskName }}</span>
+        </div>
+        <div class="col-1">
+          <span class="m-1">{{ task.priority }}</span>
+        </div>
+        <div class="col-8">
+          <span class="m-1">{{ task.dueDate }}</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-3">
+      <button
+        class="btn btn-primary btn-sm"
+        type="button"
+        (click)="this.onViewTaskDetailsClicked()"
+      >
+        View Task
+      </button>
+    </div>
+  </div>
+</div>
