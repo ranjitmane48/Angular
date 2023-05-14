@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 import {
+  BehaviorSubject,
   catchError,
   combineLatest,
   map,
@@ -25,6 +26,9 @@ export class ProductService {
     private productCategoryService: ProductCategoryService
   ) {}
 
+  private productSelectedSubject = new BehaviorSubject<number>(0);
+  productSelectedAction$ = this.productSelectedSubject.asObservable();
+
   products$ = this.http.get<Product[]>(this.productsUrl).pipe(
     tap((data) => console.log('Products: ', JSON.stringify(data))),
     catchError(this.handleError)
@@ -47,10 +51,20 @@ export class ProductService {
     )
   );
 
-  selectedProduct$ = this.productsWithCategories$.pipe(
-    map((products) => products.find((product) => product.categoryId === 5)),
-    tap((product) => console.log('selected product', product))
+  selectedProduct$ = combineLatest([
+    this.productsWithCategories$,
+    this.productSelectedAction$,
+  ]).pipe(
+    map(([products, selectedProductId]) =>
+      products.find((product) => product.id === selectedProductId)
+    ),
+    tap((product) => console.log('selectedProduct', product))
   );
+
+  //this method emits the selected product id is emitted in selected product action
+  selectedProductChanged(selectedProductId: number): void {
+    this.productSelectedSubject.next(selectedProductId);
+  }
 
   private fakeProduct(): Product {
     return {
