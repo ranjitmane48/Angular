@@ -18,7 +18,7 @@ import { ProductCategoryService } from '../product-categories/product-category.s
   providedIn: 'root',
 })
 export class ProductService {
-  private productsUrl = 'api/products';
+  private productsUrl = 'api/products1';
   private suppliersUrl = 'api/suppliers';
 
   constructor(
