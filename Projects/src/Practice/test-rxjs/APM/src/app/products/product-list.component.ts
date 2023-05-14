@@ -1,10 +1,9 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
-import { Observable, catchError, of, EMPTY, filter, map } from 'rxjs';
-import { ProductCategory } from '../product-categories/product-category';
+import { catchError, EMPTY, combineLatest, map, BehaviorSubject } from 'rxjs';
 
-import { Product } from './product';
 import { ProductService } from './product.service';
+import { ProductCategoryService } from '../product-categories/product-category.service';
 
 @Component({
   templateUrl: './product-list.component.html',
@@ -14,49 +13,64 @@ import { ProductService } from './product.service';
 export class ProductListComponent {
   pageTitle = 'Product List';
   errorMessage = '';
-  categories: ProductCategory[] = [];
-  selectedCategory = 1;
+  //selectedCategory = 1;
 
-  products$: Observable<Product[]> | undefined =
-    this.productService.productsWithCategories$.pipe(
-      catchError((error) => {
-        this.errorMessage = error;
-        //return of([]);
-        return EMPTY;
-      })
-    );
+  private categorySelectedSubject = new BehaviorSubject<number>(0);
+  //create observable from the subject
+  categorySelectedAction$ = this.categorySelectedSubject.asObservable();
 
-  constructor(private productService: ProductService) {}
-
-  productsSelectedCategory$ = this.productService.productsWithCategories$.pipe(
-    map((products) =>
-      products.filter((product) =>
-        this.selectedCategory
-          ? product.categoryId === this.selectedCategory
-          : true
-      )
-    )
+  productCategories$ = this.productCategoryService.productCategories$.pipe(
+    catchError((err) => {
+      this.errorMessage = err;
+      return EMPTY;
+    })
   );
 
-  // ngOnInit(): void {
-  //   this.products$ = this.productService.getProducts().pipe(
+  // productsSelectedCategory$ = this.productService.productsWithCategories$.pipe(
+  //   map((products) =>
+  //     products.filter((product) =>
+  //       this.selectedCategory
+  //         ? product.categoryId === this.selectedCategory
+  //         : true
+  //     )
+  //   )
+  // );
+
+  products$ = combineLatest([
+    this.productService.productsWithCategories$,
+    this.categorySelectedAction$,
+    //this.categorySelectedAction$.pipe(startWith(0)),
+  ]).pipe(
+    map(([products, selectedCategoryId]) =>
+      products.filter((product) =>
+        selectedCategoryId ? product.categoryId === selectedCategoryId : true
+      )
+    ),
+    catchError((error) => {
+      this.errorMessage = error;
+      return EMPTY;
+    })
+  );
+
+  // products$: Observable<Product[]> | undefined =
+  //   this.productService.productsWithCategories$.pipe(
   //     catchError((error) => {
   //       this.errorMessage = error;
   //       //return of([]);
   //       return EMPTY;
   //     })
   //   );
-  //   this.productService.getProducts().subscribe({
-  //     next: (products) => (this.products = products),
-  //     error: (err) => (this.errorMessage = err),
-  //   });
-  // }
+
+  constructor(
+    private productService: ProductService,
+    private productCategoryService: ProductCategoryService
+  ) {}
 
   onAdd(): void {
     console.log('Not yet implemented');
   }
 
   onSelected(categoryId: string): void {
-    console.log('Not yet implemented');
+    this.categorySelectedSubject.next(+categoryId);
   }
 }

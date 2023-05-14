@@ -12,7 +12,10 @@
             (change)="onSelected($any($event.target).value)"
           >
             <option value="0">- Display All -</option>
-            <option *ngFor="let category of categories" [value]="category.id">
+            <option
+              *ngFor="let category of productCategories$ | async"
+              [value]="category.id"
+            >
               {{ category.name }}
             </option>
           </select>
@@ -30,10 +33,7 @@
     </div>
 
     <div class="table-responsive">
-      <table
-        class="table mb-0"
-        *ngIf="productsSelectedCategory$ | async as products"
-      >
+      <table class="table mb-0" *ngIf="products$ | async as products">
         <caption>
           products
         </caption>
