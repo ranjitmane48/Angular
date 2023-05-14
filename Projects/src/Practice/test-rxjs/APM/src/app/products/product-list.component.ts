@@ -17,7 +17,7 @@ export class ProductListComponent {
   categories: ProductCategory[] = [];
 
   products$: Observable<Product[]> | undefined =
-    this.productService.products$.pipe(
+    this.productService.productsWithCategories$.pipe(
       catchError((error) => {
         this.errorMessage = error;
         //return of([]);
