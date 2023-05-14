@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
-import { Observable, catchError, of, EMPTY } from 'rxjs';
+import { Observable, catchError, of, EMPTY, filter, map } from 'rxjs';
 import { ProductCategory } from '../product-categories/product-category';
 
 import { Product } from './product';
@@ -15,6 +15,7 @@ export class ProductListComponent {
   pageTitle = 'Product List';
   errorMessage = '';
   categories: ProductCategory[] = [];
+  selectedCategory = 1;
 
   products$: Observable<Product[]> | undefined =
     this.productService.productsWithCategories$.pipe(
@@ -26,6 +27,16 @@ export class ProductListComponent {
     );
 
   constructor(private productService: ProductService) {}
+
+  productsSelectedCategory$ = this.productService.productsWithCategories$.pipe(
+    map((products) =>
+      products.filter((product) =>
+        this.selectedCategory
+          ? product.categoryId === this.selectedCategory
+          : true
+      )
+    )
+  );
 
   // ngOnInit(): void {
   //   this.products$ = this.productService.getProducts().pipe(
