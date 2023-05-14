@@ -11,28 +11,35 @@ import { ProductService } from './product.service';
   styleUrls: ['./product-list.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ProductListComponent implements OnInit {
+export class ProductListComponent {
   pageTitle = 'Product List';
   errorMessage = '';
   categories: ProductCategory[] = [];
 
-  products$: Observable<Product[]> | undefined;
-
-  constructor(private productService: ProductService) {}
-
-  ngOnInit(): void {
-    this.products$ = this.productService.getProducts().pipe(
+  products$: Observable<Product[]> | undefined =
+    this.productService.products$.pipe(
       catchError((error) => {
         this.errorMessage = error;
         //return of([]);
         return EMPTY;
       })
     );
-    // this.productService.getProducts().subscribe({
-    //   next: (products) => (this.products = products),
-    //   error: (err) => (this.errorMessage = err),
-    // });
-  }
+
+  constructor(private productService: ProductService) {}
+
+  // ngOnInit(): void {
+  //   this.products$ = this.productService.getProducts().pipe(
+  //     catchError((error) => {
+  //       this.errorMessage = error;
+  //       //return of([]);
+  //       return EMPTY;
+  //     })
+  //   );
+  //   this.productService.getProducts().subscribe({
+  //     next: (products) => (this.products = products),
+  //     error: (err) => (this.errorMessage = err),
+  //   });
+  // }
 
   onAdd(): void {
     console.log('Not yet implemented');
