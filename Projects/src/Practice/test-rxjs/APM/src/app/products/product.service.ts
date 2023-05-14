@@ -47,14 +47,10 @@ export class ProductService {
     )
   );
 
-  // getProducts(): Observable<Product[]> {
-  //   return this.http.get<Product[]>(this.productsUrl).pipe(
-  //     tap((data) =>
-  //       console.log('Products: [In  tap method] ', JSON.stringify(data))
-  //     ),
-  //     catchError(this.handleError)
-  //   );
-  // }
+  selectedProduct$ = this.productsWithCategories$.pipe(
+    map((products) => products.find((product) => product.categoryId === 5)),
+    tap((product) => console.log('selected product', product))
+  );
 
   private fakeProduct(): Product {
     return {

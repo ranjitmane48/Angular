@@ -14,7 +14,7 @@ export class ProductListAltComponent {
   errorMessage = '';
   selectedProductId = 0;
 
-  products$ = this.productService.products$.pipe(
+  products$ = this.productService.productsWithCategories$.pipe(
     catchError((error) => {
       this.errorMessage = error;
       //return of([]);
@@ -23,13 +23,6 @@ export class ProductListAltComponent {
   );
 
   constructor(private productService: ProductService) {}
-
-  // ngOnInit(): void {
-  //   this.productService.getProducts().subscribe({
-  //     next: (products) => (this.products = products),
-  //     error: (err) => (this.errorMessage = err),
-  //   });
-  // }
 
   onSelected(productId: number): void {
     console.log('Not yet implemented');

@@ -13,10 +13,8 @@ import { ProductCategoryService } from '../product-categories/product-category.s
 export class ProductListComponent {
   pageTitle = 'Product List';
   errorMessage = '';
-  //selectedCategory = 1;
 
   private categorySelectedSubject = new BehaviorSubject<number>(0);
-  //create observable from the subject
   categorySelectedAction$ = this.categorySelectedSubject.asObservable();
 
   productCategories$ = this.productCategoryService.productCategories$.pipe(
@@ -25,16 +23,6 @@ export class ProductListComponent {
       return EMPTY;
     })
   );
-
-  // productsSelectedCategory$ = this.productService.productsWithCategories$.pipe(
-  //   map((products) =>
-  //     products.filter((product) =>
-  //       this.selectedCategory
-  //         ? product.categoryId === this.selectedCategory
-  //         : true
-  //     )
-  //   )
-  // );
 
   products$ = combineLatest([
     this.productService.productsWithCategories$,
@@ -51,15 +39,6 @@ export class ProductListComponent {
       return EMPTY;
     })
   );
-
-  // products$: Observable<Product[]> | undefined =
-  //   this.productService.productsWithCategories$.pipe(
-  //     catchError((error) => {
-  //       this.errorMessage = error;
-  //       //return of([]);
-  //       return EMPTY;
-  //     })
-  //   );
 
   constructor(
     private productService: ProductService,
