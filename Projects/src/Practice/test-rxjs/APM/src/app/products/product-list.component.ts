@@ -25,7 +25,7 @@ export class ProductListComponent {
   );
 
   products$ = combineLatest([
-    this.productService.productsWithCategories$,
+    this.productService.productsWithAdd$,
     this.categorySelectedAction$,
     //this.categorySelectedAction$.pipe(startWith(0)),
   ]).pipe(
@@ -46,7 +46,7 @@ export class ProductListComponent {
   ) {}
 
   onAdd(): void {
-    console.log('Not yet implemented');
+    this.productService.addProduct();
   }
 
   onSelected(categoryId: string): void {

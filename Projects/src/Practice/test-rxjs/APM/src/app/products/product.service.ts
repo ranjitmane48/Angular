@@ -6,7 +6,10 @@ import {
   catchError,
   combineLatest,
   map,
+  merge,
   Observable,
+  scan,
+  Subject,
   tap,
   throwError,
 } from 'rxjs';
@@ -18,7 +21,7 @@ import { ProductCategoryService } from '../product-categories/product-category.s
   providedIn: 'root',
 })
 export class ProductService {
-  private productsUrl = 'api/products1';
+  private productsUrl = 'api/products';
   private suppliersUrl = 'api/suppliers';
 
   constructor(
@@ -64,6 +67,24 @@ export class ProductService {
   //this method emits the selected product id is emitted in selected product action
   selectedProductChanged(selectedProductId: number): void {
     this.productSelectedSubject.next(selectedProductId);
+  }
+
+  private productInsertedSubject$ = new Subject<Product>();
+  productInsertedAction$ = this.productInsertedSubject$.asObservable();
+
+  productsWithAdd$ = merge(
+    this.productsWithCategories$,
+    this.productInsertedAction$
+  ).pipe(
+    scan(
+      (acc, value) => (value instanceof Array ? [...value] : [...acc, value]),
+      [] as Product[]
+    )
+  );
+
+  addProduct(newProduct?: Product): void {
+    newProduct = newProduct || this.fakeProduct();
+    this.productInsertedSubject$.next(newProduct);
   }
 
   private fakeProduct(): Product {
