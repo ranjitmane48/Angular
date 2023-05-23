@@ -1,0 +1,40 @@
+<div class="container">
+    <div class="row">
+        <div class="col">
+        <button class="btn btn-primary">Only show odd numbers</button>
+
+
+        <ul class="list-group my-2 ">
+            <li class="list-group-item"
+                *ngFor="let number of numbers"
+               >
+                {{number}}
+            </li>
+        </ul>
+
+        <ul class="list-group my-2">
+            <li class="list-group-item"
+                *ngFor="let evenNumber of evenNumbers"
+                [ngClass]="{even: evenNumber % 2 === 0}"
+                [ngStyle]="{backgroundColor: evenNumber % 2 === 0 ? 'yellow' : 'purple'}">
+                {{evenNumber}}
+            </li>
+        </ul>
+
+        <ul class="list-group my-2 ">
+            <li class="list-group-item"
+                *ngFor="let oddNumber of oddNumbers"
+                [ngClass]="{odd: oddNumber % 2 !== 0}"
+                [ngStyle]="{backgroundColor: oddNumber % 2 !== 0 ? 'purple' : 'yellow'}">
+                {{oddNumber}}
+            </li>
+        </ul>
+
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <p appBasicHighlight>Test Basic Highlight</p>
+    <p appBetterHighlight [defaultColor]="'magenta'" [highlightColor]="'red'">Test Better Highlight</p>
+</div>

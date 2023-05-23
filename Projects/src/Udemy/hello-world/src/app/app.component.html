@@ -1,0 +1,63 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Server Manager App</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#appNavbarNav"
+      aria-controls="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="appNavbarNav">
+      <div class="navbar-nav">
+        <a class="nav-link active" aria-current="page" href="#">Home</a>
+        <a class="nav-link" href="#">Features</a>
+        <a class="nav-link" href="#">Pricing</a>>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="container-fluid bg-light">
+  <div class="row">
+    <div class="col">
+      <app-server-register
+        (serverCreated)="onServerAdded($event)"
+        (bluePrintCreated)="onBluePrintAdded($event)"
+      >
+      </app-server-register>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <app-server-element
+        *ngFor="let serverElement of serverElements"
+        [serverInputElement]="serverElement">
+
+        <p #contentParagraph> Server Element Paragraph </p>
+        <ul>
+          <li>
+            <span class="card-text me-2 fw-semibold">
+              {{ serverElement?.type}}
+            </span>
+          </li>
+          <li>
+            <span class="card-text me-2 fw-semibold">
+              {{ serverElement?.name }}
+            </span>
+          </li>
+          <li>
+            <span class="card-text me-2 fw-semibold">
+              {{ serverElement?.content }}
+            </span>
+          </li>
+        </ul>
+      </app-server-element>
+    </div>
+  </div>
+</div>

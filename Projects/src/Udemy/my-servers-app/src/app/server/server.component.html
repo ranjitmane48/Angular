@@ -1,0 +1,17 @@
+<div class="card">
+    <div class="card-title justify-content-center">
+      <p>Add new servers</p>
+    </div>
+
+    <div class="card-body">
+      <label>Server Name</label>
+      <input type="text" class="form-control" [(ngModel)]="this.serverName">
+
+      <label>Server Content</label>
+      <input type="text" class="form-control" [(ngModel)]="this.serverContent">
+    </div>
+
+    <div class="card-footer">
+      <button class="btn btn-primary" (click)="addNewServer()">Add Server</button>
+    </div>
+  </div>
